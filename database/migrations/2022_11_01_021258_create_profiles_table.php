@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->string('username');
+            $table->string('profile_pic');
             $table->timestamps();
+
+            $table->bigInteger('user_id')->references('id')->on('users')->onDe1ete('cascade')->onUpdate('cascade');
         });
     }
 
