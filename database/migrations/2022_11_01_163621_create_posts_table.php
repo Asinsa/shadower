@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('image')->nullable();
             $table->timestamps();
+
+            $table->bigInteger('profile_id')->refernces('id')->on('profiles')->onDelete('cascade')->onUpdate('cascade'); 
         });
     }
 
