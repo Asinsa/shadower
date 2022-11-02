@@ -16,11 +16,13 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        // Hardcoded User
-        $a = new User();
-        $a->name = "Shadow Shadow";
-        $a->email = "shadow@gmail.com";
-        $a->password = Hash::make('password');
-        $a->save();
+        // Hardcoded User that errors cos new is created every time
+        //$a = new User();
+        //$a->name = "Shadow Shadow";
+        //$a->email = "shadow@gmail.com";
+        //$a->password = Hash::make('password');
+        //$a->save();
+
+        User::factory()->count(50)->create();
     }
 }
