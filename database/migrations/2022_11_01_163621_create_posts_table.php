@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('image')->nullable();
+            $table->string('body')->nullable();
             $table->timestamps();
 
             $table->bigInteger('profile_id')->refernces('id')->on('profiles')->onDelete('cascade')->onUpdate('cascade'); 
