@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('body')->nullable();
             $table->timestamps();
 
-            $table->bigInteger('profile_id')->refernces('id')->on('profiles')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->bigInteger('profile_id')->references('id')->on('profiles')->onDelete('cascade')->onUpdate('cascade'); 
         });
     }
 

@@ -14,8 +14,8 @@ class Post extends Model
         return $this->belongsTo(Profile::class);
     }
 
-    public function comments()
+    public function interactions()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsToMany(Profile::class, 'interactions');
     }
 }

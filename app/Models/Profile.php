@@ -18,9 +18,9 @@ class Profile extends Model
     {
         return $this->hasMany(Post::class);
     }
-
-    public function comments()
+    
+    public function interactions()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsToMany(Post::class, 'interactions');
     }
 }
