@@ -21,6 +21,6 @@ class Profile extends Model
     
     public function interactions()
     {
-        return $this->belongsToMany(Post::class, 'interactions');
+        return $this->hasMany(Interaction::class);
     }
 }
