@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -16,13 +17,13 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        // Hardcoded User that errors cos new is created every time
-        //$a = new User();
-        //$a->name = "Shadow Shadow";
-        //$a->email = "shadow@gmail.com";
-        //$a->password = Hash::make('password');
-        //$a->save();
+        // Hardcoded User
+        $a = new User();
+        $a->name = "Shadow Shadow";
+        $a->email = "shadow@gmail.com";
+        $a->password = Hash::make('password');
+        $a->save();
 
-        User::factory()->count(50)->create();
+        User::factory()->has(Profile::factory())->count(10)->create();
     }
 }

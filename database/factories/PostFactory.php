@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Profile;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -20,7 +21,7 @@ class PostFactory extends Factory
             'title' => fake()->sentence(6, true),
             'image' => fake()->imageUrl(640, 800),
             'body' => fake()->text(200),
-            'profile_id' => fake()->numberBetween(1, 51),
+            'profile_id' => Profile::all()->random()->id,
         ];
     }
 }

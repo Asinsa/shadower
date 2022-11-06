@@ -15,6 +15,7 @@ class InteractionTableSeeder extends Seeder
      */
     public function run()
     {
+        // Hardcoded Interaction
         $a = new Interaction;
         $a->profile_id = 1;
         $a->post_id = 1;

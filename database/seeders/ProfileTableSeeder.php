@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Profile;
+use App\Models\Post;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,6 +23,6 @@ class ProfileTableSeeder extends Seeder
         $a->user_id = 1;
         $a->save();
 
-        Profile::factory()->count(50)->create();
+        Profile::factory()->has(Post::factory()->count(5))->count(5)->create();
     }
 }
