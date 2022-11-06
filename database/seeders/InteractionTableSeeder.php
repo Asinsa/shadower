@@ -21,5 +21,7 @@ class InteractionTableSeeder extends Seeder
         $a->interaction_type = "comment";
         $a->comment = "hi there";
         $a->save();
+
+        Interaction::factory()->count(50)->create();
     }
 }
