@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+
             $table->string('title');
             $table->string('image')->nullable();
             $table->string('body')->nullable();
-            $table->timestamps();
+            $table->bigInteger('profile_id')->references('id')->on('profiles')
+                ->onDelete('cascade')->onUpdate('cascade');
 
-            $table->bigInteger('profile_id')->references('id')->on('profiles')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->timestamps();
         });
     }
 
