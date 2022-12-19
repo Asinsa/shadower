@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Shadower - @yeild('title')</title>
+    <title>Shadower - @yield('title')</title>
 </head>
 
 <body>
-    <h1>Shadower - @yeild('title')</h1>
+    <h1>Shadower - @yield('title')</h1>
     
     <div>
         @yield('content')
