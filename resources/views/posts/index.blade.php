@@ -5,6 +5,9 @@
 @section('content')
     <p>All posts:</p>
     <ul>
-        <li>Post</li>
+        @foreach ($posts as $post)
+            <li>{{ $post->title }}</li>
+        @endforeach
     </ul>
+
 @endsection
