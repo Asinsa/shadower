@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ Route::get('/posts/{id}', [PostController::class, 'show']);
 
 Route::get('/profiles', [ProfileController::class, 'index']);
 Route::get('/profiles/{id}', [ProfileController::class, 'show']);
+
+Route::get('/users', [UserController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
