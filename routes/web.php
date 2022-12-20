@@ -25,7 +25,7 @@ Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{id}', [PostController::class, 'show']);
 
 Route::get('/profiles', [ProfileController::class, 'index']);
-
+Route::get('/profiles/{id}', [ProfileController::class, 'show']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
