@@ -6,14 +6,16 @@
     <p>All interactions:</p>
     <ul>
         @foreach ($interactions as $interaction)
+            <li><a href='{{ route('profiles.show', ['id' => $interaction->profile->id]) }}'>{{ $interaction->profile->username }}</a>
             @if ( $interaction->interaction_type == "comment")
-                <li>{{ $interaction->profile->username }} commented "{{ $interaction->comment }}" on the post "{{ $interaction->post->title }}"
+                 commented "{{ $interaction->comment }}" on
             @elseif ($interaction->interaction_type == "like")
-                <li>{{ $interaction->profile->username }} liked the post "{{ $interaction->post->title }}"
+                 liked
             @else
                 Unknown
             @endif
-             at {{$interaction->created_at}}</li>
+             the post "<a href='{{ route('posts.show', ['id' => $interaction->post->id]) }}'>{{ $interaction->post->title }}</a>" 
+             at {{$interaction->created_at}}.</li>
         @endforeach
     </ul>
 
