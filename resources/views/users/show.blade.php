@@ -10,7 +10,7 @@
         <li>Profile: 
             @foreach ($profiles as $profile)
                 @if ($profile->user_id == $user->id)
-                    <a href='/profiles/{{$profile->id}}'>{{ $profile->username }}</a>
+                    <a href='{{ route('profiles.show', ['id' => $profile->id]) }}'>{{ $profile->username }}</a>
                 @endif
             @endforeach
         </li>

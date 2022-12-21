@@ -6,7 +6,7 @@
     <p>All profiles:</p>
     <ul>
         @foreach ($profiles as $profile)
-            <li>{{ $profile->username }}</li>
+            <li><a href='{{ route('profiles.show', ['id' => $profile->id]) }}'>{{ $profile->username }}</a></li>
         @endforeach
     </ul>
 

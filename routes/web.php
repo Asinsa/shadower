@@ -27,7 +27,7 @@ Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/{id}', [PostController::class, 'show']);
 
 Route::get('/profiles', [ProfileController::class, 'index']);
-Route::get('/profiles/{id}', [ProfileController::class, 'show']);
+Route::get('/profiles/{id}', [ProfileController::class, 'show'])->name('profiles.show');
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
