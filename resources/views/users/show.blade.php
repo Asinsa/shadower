@@ -7,14 +7,13 @@
         <li>Name: {{$user->name}}</li>
         <li>Email: {{$user->email}}</li>
         <li>Email Verification: {{$user->email_verified_at ?? "Unknown" }}</li>
-        <li>Profile/s: </li>
-        <ul>
+        <li>Profile: 
             @foreach ($profiles as $profile)
                 @if ($profile->user_id == $user->id)
-                    <li><a href='/profiles/{{$profile->id}}'>{{ $profile->username }}</a></li>
+                    <a href='/profiles/{{$profile->id}}'>{{ $profile->username }}</a>
                 @endif
             @endforeach
-        </ul>
+        </li>
     </ul>
 
 @endsection

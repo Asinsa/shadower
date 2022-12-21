@@ -30,7 +30,7 @@ Route::get('/profiles', [ProfileController::class, 'index']);
 Route::get('/profiles/{id}', [ProfileController::class, 'show']);
 
 Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/{id}', [UserController::class, 'show']);
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
 Route::get('/interactions', [InteractionController::class, 'index']);
 
