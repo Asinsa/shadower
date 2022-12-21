@@ -7,13 +7,7 @@
         <li>Name: {{$user->name}}</li>
         <li>Email: {{$user->email}}</li>
         <li>Email Verification: {{$user->email_verified_at ?? "Unknown" }}</li>
-        <li>Profile: 
-            @foreach ($profiles as $profile)
-                @if ($profile->user_id == $user->id)
-                    <a href='{{ route('profiles.show', ['id' => $profile->id]) }}'>{{ $profile->username }}</a>
-                @endif
-            @endforeach
-        </li>
+        <li>Profile: <a href='{{ route('profiles.show', ['id' => $user->profile->id]) }}'>{{ $user->profile->username }}</a></li>
     </ul>
 
 @endsection
