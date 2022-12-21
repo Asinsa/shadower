@@ -6,7 +6,7 @@
     <ul>
         <li>Name: {{$user->name}}</li>
         <li>Email: {{$user->email}}</li>
-        <li>Email Verification: {{$user->email_verified_at}}</li>
+        <li>Email Verification: {{$user->email_verified_at ?? "Unknown" }}</li>
     </ul>
 
 @endsection
