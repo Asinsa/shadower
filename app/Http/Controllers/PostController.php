@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -36,7 +37,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request['title']);
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'image' => 'required|max:2048',
+            'body' => 'required|max:2000',
+        ]);
+
+        return "Passed Validation";
     }
 
     /**
