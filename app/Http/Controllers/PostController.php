@@ -100,8 +100,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+        $profile_id = $post->profile->id;
         $post->delete();
 
-        return redirect()->route('posts.index')->with('message', 'Post was successfully deleted');
+        return redirect()->route('profiles.show', ['id' => $profile_id])->with('message', 'Post was successfully deleted');
     }
 }
