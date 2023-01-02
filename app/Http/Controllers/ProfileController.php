@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\ValidatedData;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -25,7 +27,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('profiles.create');
     }
 
     /**
@@ -36,7 +38,19 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'username' => 'required|max:30',
+            'profile_pic' => 'nullable|url|max:2048',
+        ]);
+
+        $profile = new Profile;
+        $profile->username = $validatedData['username'];
+        $profile->profile_pic = $validatedData['profile_pic'];
+        $profile->user_id = Auth::id();
+        $profile->save();
+
+        session()->flash('message', 'Profile was successfully created!');
+        return redirect()->route('profiles.show', ['id' => Auth::user()->profile->id]);
     }
 
     /**

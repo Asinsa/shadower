@@ -3,6 +3,9 @@
 @section('title', 'Show Profile View')
 
 @section('content')
+    @if (session('message'))
+        <p><b>{{ session('message') }}</b></p>
+    @endif
     <ul>
         <li>Username: {{$profile->username}}</li>
         <li>Profile Pic: {{$profile->profile_pic}}</li>

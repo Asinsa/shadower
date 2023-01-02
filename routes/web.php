@@ -17,18 +17,19 @@ use App\Http\Controllers\InteractionController;
 |
 */
 
-/*
+
 Route::get('/', function () {
     return view('welcome');
 });
-*/
 
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('posts', [PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 
-Route::get('/profiles', [ProfileController::class, 'index']);
+Route::get('/profiles', [ProfileController::class, 'index'])->name('profiles.index');
+Route::get('/profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
+Route::post('profiles', [ProfileController::class, 'store'])->name('profiles.store');
 Route::get('/profiles/{id}', [ProfileController::class, 'show'])->name('profiles.show');
 
 Route::get('/users', [UserController::class, 'index']);
