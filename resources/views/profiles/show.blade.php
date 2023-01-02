@@ -15,7 +15,15 @@
     <h2>Posts by {{$profile->username}}</h2>
     <ul>
         @foreach ($profile->posts as $post)
-            <li><a href='{{ route('posts.show', ['id' => $post->id]) }}'>{{ $post->title }}</a></li>
+            <li><a href='{{ route('posts.show', ['id' => $post->id]) }}'>{{ $post->title }}</a>
+            @if(Auth::user() == $profile->user)
+                <form style="display:inline" method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Delete</button>
+                </form>
+            @endif
+            </li>
         @endforeach
     </ul>
 
@@ -25,7 +33,15 @@
             @if ( $interaction->interaction_type == "comment")
                 <li>"{{ $interaction->comment }}" 
                 on the post "<a href='{{ route('posts.show', ['id' => $interaction->post->id]) }}'>{{ $interaction->post->title }}</a>" 
-                at {{$interaction->created_at}}.</li>
+                at {{$interaction->created_at}}.
+                @if(Auth::user() == $profile->user)
+                    <form style="display:inline" method="POST" action="{{ route('interactions.destroy', ['id' => $interaction->id]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+                @endif
+                </li>
             @endif
         @endforeach
     </ul>
