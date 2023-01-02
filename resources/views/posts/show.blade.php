@@ -3,11 +3,13 @@
 @section('title', 'Show Post View')
 
 @section('content')
-    <form method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
-        @csrf
-        @method('DELETE')
-        <button type="submit">Delete Post</button>
-    </form>
+    @if(Auth::user() == $post->profile->user)
+        <form method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete Post</button>
+        </form>
+    @endif
     <ul>
         <li>Title: {{$post->title}}</li>
         <li>Image: {{$post->image}}</li>
