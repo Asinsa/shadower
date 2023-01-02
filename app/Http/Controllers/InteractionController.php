@@ -96,6 +96,10 @@ class InteractionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Interaction::findOrFail($id);
+        $post_id = $comment->post->id;
+        $comment->delete();
+
+        return redirect()->route('posts.show', ['id' => $post_id])->with('message', 'Comment was successfully deleted');
     }
 }

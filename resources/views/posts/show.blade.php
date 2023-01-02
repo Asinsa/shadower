@@ -34,12 +34,20 @@
                 <input type="submit" value="Submit">
             </form>
         @endif
-
+        <br>
         @foreach ($post->interactions as $interaction)
             @if ( $interaction->interaction_type == "comment")
                 <li><a href='{{ route('profiles.show', ['id' => $interaction->profile->id]) }}'>{{ $interaction->profile->username }}</a>
                  commented "{{ $interaction->comment }}"
-                 at {{$interaction->created_at}}.</li>
+                 at {{$interaction->created_at}}.
+                @if(Auth::user() == $interaction->profile->user)
+                    <form style="display:inline" method="POST" action="{{ route('interactions.destroy', ['id' => $interaction->id]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Delete</button>
+                    </form>
+                @endif
+                </li>
             @endif
         @endforeach
     </ul>
