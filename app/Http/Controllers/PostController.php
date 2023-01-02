@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -39,11 +41,19 @@ class PostController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'image' => 'required|max:2048',
-            'body' => 'required|max:2000',
+            'image' => 'nullable|url|max:2048',
+            'body' => 'nullable|max:2000',
         ]);
 
-        return "Passed Validation";
+        $post = new Post;
+        $post->title = $validatedData['title'];
+        $post->image = $validatedData['image'];
+        $post->body = $validatedData['body'];
+        $post->profile_id = Auth::user()->profile->id;
+        $post->save();
+
+        session()->flash('message', 'Post was successfully created!');
+        return redirect()->route('posts.index');
     }
 
     /**
