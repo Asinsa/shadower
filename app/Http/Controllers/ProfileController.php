@@ -39,7 +39,7 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'username' => 'required|max:30',
+            'username' => 'required|unique:profiles|max:30',
             'profile_pic' => 'nullable|url|max:2048',
         ]);
 

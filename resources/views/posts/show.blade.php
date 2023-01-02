@@ -16,13 +16,17 @@
         <p><b>{{ session('message') }}</b></p>
     @endif
     <ul>
-        <form method="POST" action="{{ route('interactions.store') }}">
-            @csrf
-            <p>Comment: <input type="text" name="comment"
-                value="{{ old('title') }}"></p>
-            <input type="hidden" name="post_id" value={{ $post->id }}>
-            <input type="submit" value="Submit">
-        </form>
+        @if(Auth::id() == null)
+            <p><a href="{{ route('dashboard') }}">Login</a> To Comment</p>
+        @else
+            <form method="POST" action="{{ route('interactions.store') }}">
+                @csrf
+                <p>Comment: <input type="text" name="comment"
+                    value="{{ old('title') }}"></p>
+                <input type="hidden" name="post_id" value={{ $post->id }}>
+                <input type="submit" value="Submit">
+            </form>
+        @endif
 
         @foreach ($post->interactions as $interaction)
             @if ( $interaction->interaction_type == "comment")

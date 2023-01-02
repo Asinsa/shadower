@@ -6,7 +6,11 @@
     @if (session('message'))
         <p><b>{{ session('message') }}</b></p>
     @endif
-    <a href="{{ route('posts.create')}}">Create New Post</a>
+    @if(Auth::id() == null)
+        <p><a href="{{ route('dashboard') }}">Login</a> To Post</p>
+    @else
+        <a href="{{ route('posts.create')}}">Create New Post</a>
+    @endif
     <p>All posts:</p>
     <ul>
         @foreach ($posts as $post)
