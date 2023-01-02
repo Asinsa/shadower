@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Interaction;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\ValidatedData;
+use Illuminate\Support\Facades\Auth;
 
 class InteractionController extends Controller
 {
@@ -36,7 +38,20 @@ class InteractionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'comment' => 'required|max:255',
+            'post_id' => 'required',
+        ]);
+
+        $comment = new Interaction;
+        $comment->profile_id = Auth::user()->profile->id;
+        $comment->post_id = $validatedData['post_id'];
+        $comment->interaction_type = 'comment';
+        $comment->comment = $validatedData['comment'];
+        $comment->save();
+
+        session()->flash('message', 'Comment was successfully created!');
+        return redirect()->route('posts.show', ['id' => $validatedData['post_id']]);
     }
 
     /**

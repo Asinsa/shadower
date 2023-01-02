@@ -34,8 +34,8 @@ Route::get('/profiles/{id}', [ProfileController::class, 'show'])->name('profiles
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
-Route::get('/interactions', [InteractionController::class, 'index']);
-
+Route::get('/interactions', [InteractionController::class, 'index'])->name('interactions.index');
+Route::post('/interactions', [InteractionController::class, 'store'])->name('interactions.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
