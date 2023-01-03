@@ -6,6 +6,12 @@
     @if (session('message'))
         <p><b>{{ session('message') }}</b></p>
     @endif
+
+    <form method="GET" action="{{ route('profiles.edit', ['id' => $profile->id]) }}">
+        @csrf
+        <button type="submit">Edit Profile</button>
+    </form>
+
     <ul>
         <li>Username: {{$profile->username}}</li>
         <li>Profile Pic: {{$profile->profile_pic}}</li>

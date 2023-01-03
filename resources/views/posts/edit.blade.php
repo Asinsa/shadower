@@ -13,7 +13,7 @@
         <p>Body: <input type="text" name="body"
             value="{{ $post->body }}"></p>
         <input type="submit" value="Save">
-        <a href="{{ route('posts.index') }}">Cancel</a>
+        <a href="{{ route('posts.show', ['id' => $post->id]) }}">Cancel</a>
     </form>
 
 @endsection

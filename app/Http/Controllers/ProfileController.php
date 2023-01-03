@@ -6,6 +6,7 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -73,7 +74,8 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $profile = Profile::findOrFail($id);
+        return view('profiles.edit', ['profile' => $profile]);
     }
 
     /**
@@ -85,7 +87,25 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $profile = Profile::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'username' => [
+                'required',
+                'max:30',
+                Rule::unique('profiles')->ignore($id),],
+            'profile_pic' => 'nullable|url|max:2048',
+        ]);
+
+        $profile->username = $validatedData['username'];
+        $profile->profile_pic = $validatedData['profile_pic'];
+        $profile->user_id = Auth::id();
+        $profile->save();
+
+        if ($profile->wasChanged()) {
+            session()->flash('message', 'Profile was successfully edited!');
+        }
+        return redirect()->route('profiles.show', ['id' => $id]);
     }
 
     /**
