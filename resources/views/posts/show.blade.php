@@ -3,13 +3,21 @@
 @section('title', 'Show Post View')
 
 @section('content')
+    @if (session('post_message'))
+        <p><b>{{ session('post_message') }}</b></p>
+    @endif
     @if(Auth::user() == $post->profile->user)
         <form method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
             @csrf
             @method('DELETE')
             <button type="submit">Delete Post</button>
         </form>
+        <form method="GET" action="{{ route('posts.edit', ['id' => $post->id]) }}">
+            @csrf
+            <button type="submit">Edit Post</button>
+        </form>
     @endif
+
     <ul>
         <li>Title: {{$post->title}}</li>
         <li>Image: {{$post->image}}</li>
@@ -43,7 +51,7 @@
                 <li><a href='{{ route('profiles.show', ['id' => $interaction->profile->id]) }}'>{{ $interaction->profile->username }}</a>
                  commented "{{ $interaction->comment }}"
                  at {{$interaction->created_at}}.
-                @if(Auth::user() == $interaction->profile->user)
+                @if(Auth::id() == $interaction->profile->user->id)
                     <form style="display:inline" method="POST" action="{{ route('interactions.destroy', ['id' => $interaction->id]) }}">
                         @csrf
                         @method('DELETE')

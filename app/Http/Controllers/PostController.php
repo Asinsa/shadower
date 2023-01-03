@@ -76,7 +76,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -88,7 +89,24 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'image' => 'nullable|url|max:2048',
+            'body' => 'nullable|max:2000',
+        ]);
+
+        $post->title = $validatedData['title'];
+        $post->image = $validatedData['image'];
+        $post->body = $validatedData['body'];
+        $post->profile_id = Auth::user()->profile->id;
+        $post->save();
+
+        if ($post->wasChanged()) {
+            session()->flash('post_message', 'Post was successfully edited!');
+        }
+        return redirect()->route('posts.show', ['id' => $id]);
     }
 
     /**
