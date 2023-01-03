@@ -22,9 +22,12 @@
     @if (session('message'))
         <p><b>{{ session('message') }}</b></p>
     @endif
+
     <ul>
         @if(Auth::id() == null)
             <p><a href="{{ route('dashboard') }}">Login</a> To Comment</p>
+        @elseif(Auth::user()->profile == null)
+            <p><a href="{{ route('profiles.create') }}">Make Profile</a> To Comment</p>
         @else
             <form method="POST" action="{{ route('interactions.store') }}">
                 @csrf
@@ -34,7 +37,7 @@
                 <input type="submit" value="Submit">
             </form>
         @endif
-        <br>
+
         @foreach ($post->interactions as $interaction)
             @if ( $interaction->interaction_type == "comment")
                 <li><a href='{{ route('profiles.show', ['id' => $interaction->profile->id]) }}'>{{ $interaction->profile->username }}</a>

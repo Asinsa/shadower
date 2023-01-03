@@ -21,7 +21,7 @@
             @endif
             </li>
         @elseif(Auth::id() == $user->id)
-            <li><a href="{{ route('profiles.create')}}">Create New Profile</a>
+            <a href="{{ route('profiles.create')}}">Create New Profile</a>
         @else
             <li>No Profile</li>
         @endif

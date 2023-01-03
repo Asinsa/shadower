@@ -8,6 +8,8 @@
     @endif
     @if(Auth::id() == null)
         <p><a href="{{ route('dashboard') }}">Login</a> To Post</p>
+    @elseif(Auth::user()->profile == null)
+        <p><a href="{{ route('profiles.create') }}">Make Profile</a> To Post</p>
     @else
         <a href="{{ route('posts.create')}}">Create New Post</a>
     @endif
