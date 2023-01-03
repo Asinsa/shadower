@@ -96,6 +96,10 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $profile = Profile::findOrFail($id);
+        $user_id = $profile->user->id;
+        $profile->delete();
+
+        return redirect()->route('users.show', ['id' => $user_id])->with('message', 'Profile was successfully deleted');
     }
 }

@@ -32,6 +32,7 @@ Route::get('/profiles', [ProfileController::class, 'index'])->name('profiles.ind
 Route::get('/profiles/create', [ProfileController::class, 'create'])->middleware(['auth', 'verified'])->name('profiles.create');
 Route::post('profiles', [ProfileController::class, 'store'])->name('profiles.store');
 Route::get('/profiles/{id}', [ProfileController::class, 'show'])->name('profiles.show');
+Route::delete('/profiles/{id}', [ProfileController::class, 'destroy'])->name('profiles.destroy');
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
