@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 py-1 shadow-md w-full top-0 dark:bg-gray-900"> 
+<nav x-data="{ open: false }" class="bg-white py-1 fixed shadow-md w-full top-0 dark:bg-black"> 
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -17,6 +17,9 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
+                        {{ __('Posts') }}
                     </x-nav-link>
                     <x-nav-link :href="route('profiles.index')" :active="request()->routeIs('profiles.index')">
                         {{ __('Profiles') }}
