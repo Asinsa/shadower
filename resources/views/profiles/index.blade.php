@@ -1,12 +1,11 @@
 @extends('layouts.basic')
 
-@section('title', 'Profile Index')
+@section('title', 'All Profiles')
 
 @section('content')
-    <div class="py-5 max-w-7xl mx-auto sm:px-6 lg:px-8 p-6">
-        <h1>All profiles:</h1>
-    </div>
+    <h1 class="py-5 max-w-7xl mx-auto sm:px-6 lg:px-8 p-6">All profiles:</h1>
 
+    <div class="py-5 max-w-7xl mx-auto sm:px-6 lg:px-8 p-6">
         @foreach ($profiles as $profile)
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <a href='{{ route('profiles.show', ['id' => $profile->id]) }}'>

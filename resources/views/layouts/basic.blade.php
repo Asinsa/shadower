@@ -15,35 +15,39 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
 
-        @include('layouts.navigation')
+    @include('layouts.navigation')
 
-        <!-- Page Heading -->
-        <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                <h1>Shadower - @yield('title')</h1>
-            </div>
-        </header>
+    <div class="min-h-screen bg-gray-100 w-full lg:w-4/5 p-5 lg:24 h-full overflow-x-scroll">
+        <div class="p-4 mx-auto max-w-7xl">
+            <!-- Page Heading -->
+            <header class="mt-12 bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <h1>.</h1>
+                </div>
 
-        <!-- Errors -->
-        @if ($errors->any())
-            <div>
-                Errors:
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li><b>{{ $error }}</b></li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <h1>Shadower - @yield('title')</h1>
+                </div>
+            </header>
 
-        <!-- Page Content -->
-        <main>
-            <div class="w-full md:w-3/4 lg:w-4/5 p-5 md:px-12 lg:24 h-full overflow-x-scroll antialiased">
+            <!-- Errors -->
+            @if ($errors->any())
+                <div>
+                    Errors:
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li><b>{{ $error }}</b></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <!-- Page Content -->
+            <main>
                 @yield('content')
-            </div>
-        </main>
+            </main>
+        </div>
     </div>
 </body>
 
