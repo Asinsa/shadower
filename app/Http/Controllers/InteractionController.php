@@ -85,7 +85,22 @@ class InteractionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comment = Interaction::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'comment' => 'required|max:255',
+            'post_id' => 'required',
+        ]);
+
+        $comment->profile_id = Auth::user()->profile->id;
+        $comment->comment = $validatedData['comment'];
+        $comment->save();
+
+        if ($comment->wasChanged()) {
+            session()->flash('message', 'Comment was successfully edited!');
+        }
+
+        return redirect()->route('posts.show', ['id' => $validatedData['post_id']]);
     }
 
     /**

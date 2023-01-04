@@ -43,6 +43,7 @@ Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
 
 Route::get('/interactions', [InteractionController::class, 'index'])->name('interactions.index');
 Route::post('/interactions', [InteractionController::class, 'store'])->name('interactions.store');
+Route::put('/interactions/{id}', [InteractionController::class, 'update'])->name('interactions.update');
 Route::delete('/interactions/{id}', [InteractionController::class, 'destroy'])->name('interactions.destroy');
 
 Route::get('/dashboard', function () {
