@@ -18,7 +18,7 @@
     </div>
     <br>
 
-    <div class="main-scrolly-section">
+    <div class="section">
         @foreach ($posts as $post)
             <div class="item">
                 <div class="card">

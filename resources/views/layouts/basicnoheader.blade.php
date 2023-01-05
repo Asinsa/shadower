@@ -22,11 +22,7 @@
             <div class="p-4 mx-auto max-w-7xl">
 
                 <!-- Page Heading -->
-                <header class="header-section">
-                    <div class="header-text">
-                        <h1>@yield('title')</h1>
-                    </div>
-                </header>
+                <header class="header-section bg-black"></header>
 
                 <!-- Errors -->
                 @if ($errors->any())
