@@ -19,7 +19,7 @@ class ProfileTableSeeder extends Seeder
         // Hardcoded Profile
         $a = new Profile();
         $a->username = "Shadow";
-        $a->profile_pic = "https://www.pexels.com/photo/horses-on-water-13664663/";
+        $a->profile_pic = "https://api.lorem.space/image/face?w=150&h=150";
         $a->user_id = 1;
         $a->save();
 

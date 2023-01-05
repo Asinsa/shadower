@@ -19,7 +19,7 @@ class PostTableSeeder extends Seeder
         // Hardcoded Post
         $a = new Post;
         $a->title = "Hello";
-        $a->image = "https://via.placeholder.com/640x640.png/000000?text=hello";
+        $a->image = "https://api.lorem.space/image?w=150&h=180";
         $a->body = "Hello world... from the shadows";
         $a->profile_id = 1;
         $a->save();
