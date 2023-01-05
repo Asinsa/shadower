@@ -17,12 +17,12 @@
 <body class="font-sans antialiased">
 
     @include('layouts.navigation')
-    <div class="dark:bg-neutral-900">
-        <div class="mx-auto min-h-screen bg-gray-100 w-full lg:w-4/5 p-5 lg:24 h-full overflow-x-scroll">
+    <div class="dark:bg-black">
+        <div class="mx-auto min-h-screen dark:bg-black w-full lg:w-4/5 p-5 lg:24 h-full overflow-x-scroll">
             <div class="p-4 mx-auto max-w-7xl">
 
                 <!-- Page Heading -->
-                <header class="font-semibold text-xl h-300 pt-12 bg-white shadow">
+                <header class="font-semibold text-white text-xl h-300 pt-12 dark:bg-neutral-900 shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         <h1>@yield('title')</h1>
                     </div>
