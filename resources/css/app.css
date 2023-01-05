@@ -9,6 +9,10 @@
     .btn-text {
         @apply text-white;
     }
+    .btn-comment {
+        @apply inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-indigo-700 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800;
+      }
+
     .main-scrolly-section {
         @apply py-5 max-w-7xl mx-auto sm:px-6 lg:px-8;
     }
@@ -18,6 +22,7 @@
     .card {
         @apply overflow-hidden shadow-sm sm:rounded-lg text-white p-3 dark:bg-neutral-900;
     }
+
     .date-text {
         @apply text-sm dark:text-gray-400;
     }
