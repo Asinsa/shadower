@@ -19,7 +19,7 @@
     <br>
 
     @foreach ($posts as $post)
-        <div class="item">
+        <div class="item ">
             <div class="card">
                 <div class="mb-4 ml-4">
                     <div class="flex">

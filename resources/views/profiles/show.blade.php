@@ -8,7 +8,7 @@
     @endif
 
     @if(Auth::check() && Auth::user()->profile != null)
-        @if (Auth::user()->profile->id == $post->profile->id)
+        @if (Auth::user()->profile->id == $profile->id)
             <div class="flex mt-3 ml-8">
                 <form method="GET" action="{{ route('profiles.edit', ['id' => $profile->id]) }}">
                     @csrf
