@@ -19,7 +19,6 @@ class ProfileFactory extends Factory
     {
         return [
             'username' => fake()->userName(),
-            'profile_pic' => fake()->imageUrl(640, 640),
             'user_id' => User::factory(),
         ];
     }

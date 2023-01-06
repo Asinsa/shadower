@@ -30,7 +30,7 @@
                 <div class="flex">
                     <div class="flex flex-col items-center p-3">
                         <a href='{{ route('profiles.show', ['id' => $post->profile->id]) }}'>
-                            <img class="w-10 h-10 mb-1 rounded-full shadow-lg" src="{{ $post->profile->profile_pic }}" alt="Profile Pic"/>
+                            <img class="w-10 h-10 mb-1 rounded-full shadow-lg" src={{ url($post->profile->image->url)}} alt="Profile Pic"/>
                             <h5 class="username-text">{{ $post->profile->username }}</h5>
                         </a>
                     </div>
@@ -75,7 +75,7 @@
                             @if (($post->profile->profile_pic) == null)
                                 <img src="https://images.unsplash.com/photo-1551122089-4e3e72477432?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8cnVieXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="" class="h-8 w-8 object-fill rounded-full">
                             @else
-                                <img class="h-8 w-8 object-fill rounded-full" src="{{ $post->profile->profile_pic }}" alt="Profile Pic"/>
+                                <img class="h-8 w-8 object-fill rounded-full" src={{ url($interaction->profile->image->url)}} alt="Profile Pic"/>
                             @endif
                         </div>
                         <div class="block w-full">

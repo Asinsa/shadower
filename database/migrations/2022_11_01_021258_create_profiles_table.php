@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
 
             $table->string('username');
-            $table->string('profile_pic')->nullable();
             $table->bigInteger('user_id')->references('id')->on('users')
                 ->onDe1ete('cascade')->onUpdate('cascade');
 

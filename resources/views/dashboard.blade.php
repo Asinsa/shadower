@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="justify-center m-5">
                     <div class="flex flex-col items-center">
-                        <img class=" mb-1 rounded-full shadow-lg" src="{{Auth::user()->profile->profile_pic}}" width="300" height="300" alt="Profile Pic"/>
+                        <img class=" mb-1 rounded-full shadow-lg" src={{ url(Auth::user()->profile->image->url) }} width="300" height="300" alt="Profile Pic"/>
                         <h5 class="card-title">{{ Auth::user()->profile->username }}</h5>
                     </div>
                 </div>

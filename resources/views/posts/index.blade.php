@@ -25,7 +25,7 @@
                     <div class="flex">
                         <div class="flex flex-col items-center p-3">
                             <a href='{{ route('profiles.show', ['id' => $post->profile->id]) }}'>
-                                <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src="{{ $post->profile->profile_pic }}" alt="Profile Pic"/>
+                                <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src={{ url($post->profile->image->url)}} alt="Profile Pic"/>
                                 <h5 class="username-text">{{ $post->profile->username }}</h5>
                             </a>
                         </div>

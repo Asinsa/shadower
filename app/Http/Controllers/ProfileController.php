@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\Auth;
@@ -41,14 +42,23 @@ class ProfileController extends Controller
     {
         $validatedData = $request->validate([
             'username' => 'required|unique:profiles|max:30',
-            'profile_pic' => 'nullable|url|max:2048',
+            'profile_pic' => 'nullable|file|max:2048',
         ]);
 
         $profile = new Profile;
         $profile->username = $validatedData['username'];
-        $profile->profile_pic = $validatedData['profile_pic'];
         $profile->user_id = Auth::id();
         $profile->save();
+
+        if ($request->hasFile('profile_pic')) {
+            $filename = time().$request->file('profile_pic')->getClientOriginalName();
+            $path = $request->file('profile_pic')->move('images/profile_images/', $filename);
+
+            $image = new Image;
+            $image->url = $path;
+
+            $profile->image()->save($image);
+        }
 
         session()->flash('message', 'Profile was successfully created!');
         return redirect()->route('profiles.show', ['id' => Auth::user()->profile->id]);
@@ -98,7 +108,6 @@ class ProfileController extends Controller
         ]);
 
         $profile->username = $validatedData['username'];
-        $profile->profile_pic = $validatedData['profile_pic'];
         $profile->user_id = Auth::id();
         $profile->save();
 
