@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('profiles.index')" :active="request()->routeIs('profiles.index')">
                         {{ __('Profiles') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('interactions.index')" :active="request()->routeIs('interactions.index')">
+                        {{ __('Activity') }}
+                    </x-nav-link>
                 </div>
             </div>
 
