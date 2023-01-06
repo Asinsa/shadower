@@ -28,8 +28,7 @@ class PostTableSeeder extends Seeder
         $image->url = fake()->imageUrl(1920, 1080);
         $a->image()->save($image);
 
-        Post::factory()->has(Interaction::factory()->count(5))->count(5)->create();
-
+        Post::factory()->has(Interaction::factory()->count(10))->count(10)->create();
         
         $posts = Post::all();
         foreach ($posts as $post) {

@@ -23,6 +23,12 @@ class InteractionTableSeeder extends Seeder
         $a->comment = "hi there";
         $a->save();
 
+        $b = new Interaction;
+        $b->profile_id = 1;
+        $b->post_id = 1;
+        $b->interaction_type = "like";
+        $b->save();
+
         Interaction::factory()->count(50)->create();
     }
 }
