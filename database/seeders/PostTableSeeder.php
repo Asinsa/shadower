@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Post;
 use App\Models\Interaction;
+use App\Models\Image;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,11 +20,25 @@ class PostTableSeeder extends Seeder
         // Hardcoded Post
         $a = new Post;
         $a->title = "Hello";
-        $a->image = "https://api.lorem.space/image?w=150&h=180";
         $a->body = "Hello world... from the shadows";
         $a->profile_id = 1;
         $a->save();
+        
+        $image = new Image;
+        $image->url = fake()->imageUrl(640, 640);
+        $a->image()->save($image);
 
         Post::factory()->has(Interaction::factory()->count(5))->count(5)->create();
+
+        
+        $posts = Post::all();
+        foreach ($posts as $post) {
+            if ($post->profile->id % 2 == 0) {
+                $image = new Image;
+                $image->url = fake()->imageUrl(640, 640);
+                $post->image()->save($image);
+                $post->save();
+            }
+        }
     }
 }

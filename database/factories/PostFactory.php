@@ -18,8 +18,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'title' => fake()->sentence(6, true),
-            'image' => fake()->imageUrl(640, 800),
+            'title' => fake()->realText(60, 2),
             'body' => fake()->text(200),
             'profile_id' => Profile::all()->random()->id,
         ];

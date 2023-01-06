@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Image;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,16 +43,25 @@ class PostController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'image' => 'nullable|url|max:2048',
+            'image' => 'nullable|file|max:2048',
             'body' => 'nullable|max:2000',
         ]);
 
         $post = new Post;
         $post->title = $validatedData['title'];
-        $post->image = $validatedData['image'];
         $post->body = $validatedData['body'];
         $post->profile_id = Auth::user()->profile->id;
         $post->save();
+
+        if ($request->hasFile('image')) {
+            $filename = time().$request->file('image')->getClientOriginalName();
+            $path = $request->file('image')->move('images/post_images/', $filename);
+
+            $image = new Image;
+            $image->url = $path;
+
+            $post->image()->save($image);
+        }
 
         session()->flash('message', 'Post was successfully created!');
         return redirect()->route('posts.index');

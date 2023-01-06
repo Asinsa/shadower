@@ -8,11 +8,11 @@
         <form method="POST" action="{{ route('profiles.store') }}">
             @csrf
             <div class="mb-6">
-                <label for="email" class="block mb-2 normal-text">Username:</label>
+                <label class="block mb-2 normal-text">Username:</label>
                 <input type="text" name="username" value="{{ old('title') }}" class="small-form-input" required>
             </div>
             <div class="mb-6">
-                <label for="password" class="block mb-2 normal-text">Profile Picture:</label>
+                <label class="block mb-2 normal-text">Profile Picture:</label>
                 <input type="text" name="profile_pic" value="{{ old('image') }}" class="small-form-input">
             </div>
             <div class="flex justify-between">
