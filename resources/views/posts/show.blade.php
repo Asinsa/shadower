@@ -8,18 +8,20 @@
     @endif
 
     
-    @if(Auth::check() && Auth::user()->profile == $post->profile)
-    <div class="flex mt-3 ml-8">
-        <form method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class=btn-delete>Delete Post</button>
-        </form>
-        <form method="GET" action="{{ route('posts.edit', ['id' => $post->id]) }}">
-            @csrf
-            <button type="submit" class=btn-main>Edit Post</button>
-        </form>
-    </div>
+    @if(Auth::check() && Auth::user()->profile != null)
+        @if (Auth::user()->profile->id == $post->profile->id)
+            <div class="flex mt-3 ml-8">
+                <form method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class=btn-delete>Delete Post</button>
+                </form>
+                <form method="GET" action="{{ route('posts.edit', ['id' => $post->id]) }}">
+                    @csrf
+                    <button type="submit" class=btn-main>Edit Post</button>
+                </form>
+            </div>
+        @endif
     @endif
 
     <div class="item mt-3">
@@ -39,7 +41,7 @@
                 </div>
                 <a href='{{ route('posts.show', ['id' => $post->id]) }}'>
                     <div>
-                        <img src={{$post->image}} alt="Image" width="400" height="400">
+                        <img class="mx-auto" src={{$post->image}} alt="Image" width="400" height="400">
                         <div class="normal-text mt-4">
                             {{ $post->body }}
                         </div>
@@ -78,7 +80,7 @@
                             <div class="comment-content">
                                 <div class="flex justify-between">
                                     <a class="pr-4 commentuser-text" href='{{ route('profiles.show', ['id' => $interaction->profile->id]) }}'>{{ $interaction->profile->username }}</a>
-                                    <p class="pl-4 date-text text-right">{{ $post->created_at }}</p>
+                                    <p class="pl-4 date-text text-right">{{ $interaction->created_at }}</p>
                                 </div>
                                 <div class="normal-text">
                                     {{ $interaction->comment }}
