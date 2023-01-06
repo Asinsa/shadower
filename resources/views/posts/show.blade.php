@@ -61,7 +61,7 @@
             <div class="mb-4">
                 <div class="flex">
                     <div class="flex flex-grow items-center pb-2 pl-2 card-title">
-                        <h2 class="card-title">Comments</h2>
+                        <h2 id="comments" class="card-title">Comments</h2>
                     </div>
                 </div>
             </div>

@@ -75,7 +75,7 @@
                                     <a class="pr-4 commentuser-text" href='{{ route('posts.show', ['id' => $interaction->post->id]) }}'>{{ $interaction->post->title }}</a>
                                     <p class="pl-4 date-text text-right">{{ $interaction->created_at }}</p>
                                 </div>
-                                <a href='{{ route('posts.show', ['id' => $interaction->post->id]) }}'>
+                                <a href='{{ route('posts.show', ['id' => $interaction->post->id]) }}#comments'>
                                     <div class="normal-text">
                                         {{ $interaction->comment }}
                                     </div>
