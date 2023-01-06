@@ -25,7 +25,7 @@ class PostTableSeeder extends Seeder
         $a->save();
         
         $image = new Image;
-        $image->url = fake()->imageUrl(640, 640);
+        $image->url = fake()->imageUrl(1920, 1080);
         $a->image()->save($image);
 
         Post::factory()->has(Interaction::factory()->count(5))->count(5)->create();
@@ -35,7 +35,7 @@ class PostTableSeeder extends Seeder
         foreach ($posts as $post) {
             if ($post->profile->id % 2 == 0) {
                 $image = new Image;
-                $image->url = fake()->imageUrl(640, 640);
+                $image->url = fake()->imageUrl(1920, 1080);
                 $post->image()->save($image);
                 $post->save();
             }

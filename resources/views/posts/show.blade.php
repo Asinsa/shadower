@@ -41,7 +41,9 @@
                 </div>
                 <a href='{{ route('posts.show', ['id' => $post->id]) }}'>
                     <div>
-                        <img class="mx-auto" src={{ url($post->image->url)}} alt="Image" width="400" height="400">
+                        @if ($post->image != null)
+                            <img class="mx-auto" src={{ url($post->image->url)}} alt="Image" width="400" height="400">
+                        @endif
                         <div class="normal-text mt-4">
                             {{ $post->body }}
                         </div>
