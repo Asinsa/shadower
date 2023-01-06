@@ -33,7 +33,8 @@ class PostTableSeeder extends Seeder
         
         $posts = Post::all();
         foreach ($posts as $post) {
-            if ($post->profile->id % 2 == 0) {
+            $value = (bool)random_int(0, 1);
+            if ($value) {
                 $image = new Image;
                 $image->url = fake()->imageUrl(1920, 1080);
                 $post->image()->save($image);

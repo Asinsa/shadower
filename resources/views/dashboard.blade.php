@@ -33,7 +33,7 @@
         <div class="flex flex-row">
             <div class="card basis-3/5 mr-2 p-0">
                 <h2 class="card-title pt-3 pl-4">Your Posts</h2>
-                @foreach (Auth::user()->profile->posts as $post)
+                @foreach (Auth::user()->profile->posts->reverse() as $post)
                     <div class="comment-view m-3 pb-2">
                         <div class="block w-full">
                             <div class="comment-content">
@@ -66,7 +66,7 @@
             </div>
             <div class="card basis-2/5 ml-2 p-0">
                 <h2 class="card-title pt-3 pl-4">Your Comments</h2>
-                @foreach (Auth::user()->profile->interactions as $interaction)
+                @foreach (Auth::user()->profile->interactions->reverse() as $interaction)
                     @if ( $interaction->interaction_type == "comment")
                         <div class="comment-view m-3">
                             <div class="block w-full">
