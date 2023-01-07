@@ -62,7 +62,10 @@ class InteractionController extends Controller
             $like->save();
 
             session()->flash('message', 'Post Liked!');
-            return redirect()->route('posts.index');
+            if($request['redirect_to'] == "all") {
+                return redirect()->route('posts.index');
+            }
+            return redirect()->route('posts.show', ['id' => $request['post_id']]);
         }
     }
 

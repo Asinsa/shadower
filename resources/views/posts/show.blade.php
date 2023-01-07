@@ -81,6 +81,7 @@
                             </div>
                             <form method="POST" action="{{ route('interactions.store') }}">
                                 @csrf
+                                <input type="hidden" name="redirect_to" value="post">
                                 <input type="hidden" name="post_id" value={{ $post->id }}>
                                 <input type="hidden" name="interaction_type" value="like">
                                 <button type="submit" class="mt-6 h-12 w-12 text-red-600 hover:text-red-600 focus:outline-none rounded-full text-center inline-flex items-center  dark:text-white ">
