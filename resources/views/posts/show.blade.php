@@ -9,7 +9,7 @@
 
     
     @if(Auth::check() && Auth::user()->profile != null)
-        @if (Auth::user()->profile->id == $post->profile->id)
+        @if ((Auth::user()->profile->id == $post->profile->id) || (Auth::user()->roles->contains(1)))
             <div class="flex mt-3 ml-8">
                 <form method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
                     @csrf
@@ -53,7 +53,7 @@
             </div>
             <div class="flex justify-end">
                 <div class="grid grid-cols-2 place-items-end">
-                    @if (Auth::id() == null)
+                    @if (!Auth::check())
                         <div class="self-center mt-2 date-text font-bold">
                             <p>{{ DB::table('interactions')->where('interaction_type', 'like')->where('post_id', $post->id)->count() }} Likes</p>
                         </div>
@@ -139,7 +139,7 @@
                             </div>
                         </div>
                         
-                        @if(Auth::id() == $interaction->profile->user->id)
+                        @if((Auth::id() == $interaction->profile->user->id) || (Auth::user()->roles->contains(1)))
                             <div>
                                 <form style="display:inline" method="POST" action="{{ route('interactions.destroy', ['id' => $interaction->id]) }}">
                                     @csrf
@@ -156,7 +156,7 @@
                 @endif
             @endforeach
 
-            @if(Auth::id() == null)
+            @if(!Auth::check())
                 <div class=btn-main>
                     <a href="{{ route('dashboard') }}" class="btn-text">Login To Join Discussion</a>
                 </div>

@@ -80,7 +80,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        if(! Auth::check()){
+        if(!Auth::check()){
             $cookie = (Str::replace('.','',($request->ip())).'-'. $post->id);
         } else {
             $cookie = (Auth::user()->id.'-'. $post->id);

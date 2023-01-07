@@ -23,6 +23,7 @@ class UserTableSeeder extends Seeder
         $a->email = "shadow@gmail.com";
         $a->password = Hash::make('password');
         $a->save();
+        $a->roles()->attach(1); //Admin user
 
         User::factory()->has(Profile::factory())->count(10)->create();
     }

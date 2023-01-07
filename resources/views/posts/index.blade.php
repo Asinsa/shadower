@@ -54,7 +54,7 @@
                         @include('components/comments-button', ['item' => $post], ['route' => 'posts.show'])
                     </div>
                     <div class="grid grid-cols-2 place-items-end">
-                        @if (Auth::id() == null)
+                        @if (!Auth::check())
                             <div class="self-center mt-9 date-text font-bold">
                                 <p>{{ DB::table('interactions')->where('interaction_type', 'like')->where('post_id', $post->id)->count() }} Likes</p>
                             </div>

@@ -8,7 +8,7 @@
     @endif
 
     @if(Auth::check() && Auth::user()->profile != null)
-        @if (Auth::user()->profile->id == $profile->id)
+        @if ((Auth::user()->profile->id == $profile->id) || (Auth::user()->roles->contains(1)))
             <div class="flex mt-3 ml-8">
                 <form method="GET" action="{{ route('profiles.edit', ['id' => $profile->id]) }}">
                     @csrf
@@ -56,7 +56,7 @@
                         </div>
                     </div>
 
-                    @if(Auth::id() == $profile->user->id)
+                    @if((Auth::id() == $profile->user->id) || (Auth::user()->roles->contains(1)))
                         <form style="display:inline" method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
                             @csrf
                             @method('DELETE')
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         
-                        @if(Auth::id() == $interaction->profile->user->id)
+                        @if((Auth::id() == $interaction->profile->user->id) || (Auth::user()->roles->contains(1)))
                             <form style="display:inline" method="POST" action="{{ route('interactions.destroy', ['id' => $interaction->id]) }}">
                                 @csrf
                                 @method('DELETE')
