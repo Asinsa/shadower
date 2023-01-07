@@ -51,7 +51,7 @@ class InteractionController extends Controller
             $comment->comment = $validatedData['comment'];
             $comment->save();
 
-            session()->flash('message', 'Comment was successfully created!');
+            session()->flash('comment_message', 'Comment was successfully created!');
             return redirect()->route('posts.show', ['id' => $validatedData['post_id']]);
         } 
         else {
@@ -111,7 +111,7 @@ class InteractionController extends Controller
         $comment->save();
 
         if ($comment->wasChanged()) {
-            session()->flash('message', 'Comment was successfully edited!');
+            session()->flash('comment_message', 'Comment was successfully edited!');
         }
 
         return redirect()->route('posts.show', ['id' => $comment->post->id]);
@@ -129,6 +129,6 @@ class InteractionController extends Controller
         $post_id = $comment->post->id;
         $comment->delete();
 
-        return redirect()->route('posts.show', ['id' => $post_id])->with('message', 'Comment was successfully deleted');
+        return redirect()->route('posts.show', ['id' => $post_id])->with('comment_message', 'Comment was successfully deleted');
     }
 }

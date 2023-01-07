@@ -144,7 +144,7 @@ class PostController extends Controller
         $post->save();
 
         if ($post->wasChanged()) {
-            session()->flash('post_message', 'Post was successfully edited!');
+            session()->flash('message', 'Post was successfully edited!');
         }
         return redirect()->route('posts.show', ['id' => $id]);
     }
@@ -158,6 +158,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+        
         $profile_id = $post->profile->id;
         $post->delete();
 
