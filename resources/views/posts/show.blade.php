@@ -114,7 +114,7 @@
                 @if ( $interaction->interaction_type == "comment")
                     <div class="comment-view">
                         <div class="comment-profilepic">
-                            @if (($post->profile->profile_pic) == null)
+                            @if (($post->profile->image) == null)
                                 <img src="https://images.unsplash.com/photo-1551122089-4e3e72477432?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8cnVieXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="" class="h-8 w-8 object-fill rounded-full">
                             @else
                                 <img class="h-8 w-8 object-fill rounded-full" src={{ url($interaction->profile->image->url)}} alt="Profile Pic"/>
@@ -140,7 +140,7 @@
                         </div>
                         
                         @if((Auth::id() == $interaction->profile->user->id) || (Auth::user()->roles->contains(1)))
-                            <div>
+                            <div class="flex flex-col justify-end">
                                 <form style="display:inline" method="POST" action="{{ route('interactions.destroy', ['id' => $interaction->id]) }}">
                                     @csrf
                                     @method('DELETE')
