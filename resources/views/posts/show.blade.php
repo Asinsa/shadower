@@ -139,11 +139,17 @@
                         </div>
                         
                         @if(Auth::id() == $interaction->profile->user->id)
-                            <form style="display:inline" method="POST" action="{{ route('interactions.destroy', ['id' => $interaction->id]) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn-smol-delete px-2 py-2">Delete</button>
-                            </form>
+                            <div>
+                                <form style="display:inline" method="POST" action="{{ route('interactions.destroy', ['id' => $interaction->id]) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-smol-delete px-2 py-2">Delete</button>
+                                </form>
+                                <form style="display:inline" method="GET" action="{{ route('interactions.edit', ['id' => $interaction->id]) }}">
+                                    @csrf
+                                    <button type="submit" class="btn-smol-delete px-2 py-2">Edit</button>
+                                </form>
+                            </div>
                         @endif
                     </div>
                 @endif
