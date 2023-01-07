@@ -88,7 +88,8 @@ class InteractionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Interaction::findOrFail($id);
+        return view('interactions.edit', ['interaction' => $comment]);
     }
 
     /**
@@ -104,10 +105,8 @@ class InteractionController extends Controller
 
         $validatedData = $request->validate([
             'comment' => 'required|max:255',
-            'post_id' => 'required',
         ]);
 
-        $comment->profile_id = Auth::user()->profile->id;
         $comment->comment = $validatedData['comment'];
         $comment->save();
 
@@ -115,7 +114,7 @@ class InteractionController extends Controller
             session()->flash('message', 'Comment was successfully edited!');
         }
 
-        return redirect()->route('posts.show', ['id' => $validatedData['post_id']]);
+        return redirect()->route('posts.show', ['id' => $comment->post->id]);
     }
 
     /**

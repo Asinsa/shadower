@@ -22,7 +22,7 @@
                 </div>
                 <div class="flex justify-between">
                     <a class="btn-main bg-gray-500" href="{{ route('posts.show', ['id' => $post->id]) }}">Cancel</a>
-                    <button type="submit" class="btn-main align-center" value="Submit">Submit</button>
+                    <button type="submit" class="btn-main align-center" value="Submit">Update</button>
                 </div>
             </form>
         </div>

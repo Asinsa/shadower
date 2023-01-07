@@ -121,9 +121,8 @@ class ProfileController extends Controller
                 $profile->image()->save($image);
             }
         } 
-        
+
         $profile->username = $validatedData['username'];
-        $profile->user_id = Auth::id();
         $profile->save();
 
         if ($profile->wasChanged()) {

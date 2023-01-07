@@ -141,7 +141,6 @@ class PostController extends Controller
 
         $post->title = $validatedData['title'];
         $post->body = $validatedData['body'];
-        $post->profile_id = Auth::user()->profile->id;
         $post->save();
 
         if ($post->wasChanged()) {
