@@ -9,7 +9,7 @@
             <div class="m-4 w-50 bg-neutral-900 rounded-2xl px-8 py-6 shadow-lg ">
                 <div class="m-6 w-fit mx-auto ">
                     @if (($profile->image) == null)
-                        <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src="https://images.unsplash.com/photo-1665517941611-42cb25703695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80" width="300" height="300" alt="Profile Pic"/>
+                        <img class="mx-auto w-20 mb-1 rounded-full shadow-lg" src="https://images.unsplash.com/photo-1665517941611-42cb25703695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80" alt="Profile Pic"/>
                     @else
                         <img src={{ url($profile->image->url)}} class="mx-auto rounded-full w-20" alt="profile picture">
                     @endif
