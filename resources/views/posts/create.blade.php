@@ -17,7 +17,7 @@
                 </div>
                 <div class="mb-6">
                     <label class="block mb-2 normal-text">Content:</label>
-                    <input type="text" name="body" value="{{ old('body') }}" class="small-form-input" required>
+                    <input type="text" name="body" value="{{ old('body') }}" class="small-form-input">
                 </div>
                 <div class="flex justify-between">
                     <a class="btn-main bg-gray-500" href="{{ route('posts.index') }}">Cancel</a>

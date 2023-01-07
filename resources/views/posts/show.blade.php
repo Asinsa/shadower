@@ -8,19 +8,21 @@
     @endif
 
     
-    @if(Auth::check() && Auth::user()->profile != null)
-        @if ((Auth::user()->profile->id == $post->profile->id) || (Auth::user()->roles->contains(1)))
-            <div class="flex mt-3 ml-8">
-                <form method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class=btn-delete>Delete Post</button>
-                </form>
-                <form method="GET" action="{{ route('posts.edit', ['id' => $post->id]) }}">
-                    @csrf
-                    <button type="submit" class=btn-main>Edit Post</button>
-                </form>
-            </div>
+    @if(Auth::check())
+        @if(Auth::user()->profile != null)
+            @if ((Auth::user()->profile->id == $post->profile->id) || (Auth::user()->roles->contains(1)))
+                <div class="flex mt-3 ml-8">
+                    <form method="POST" action="{{ route('posts.destroy', ['id' => $post->id]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class=btn-delete>Delete Post</button>
+                    </form>
+                    <form method="GET" action="{{ route('posts.edit', ['id' => $post->id]) }}">
+                        @csrf
+                        <button type="submit" class=btn-main>Edit Post</button>
+                    </form>
+                </div>
+            @endif
         @endif
     @endif
 
@@ -143,18 +145,20 @@
                             </div>
                         </div>
                         
-                        @if((Auth::id() == $interaction->profile->user->id) || (Auth::user()->roles->contains(1)))
-                            <div class="flex flex-col justify-end">
-                                <form style="display:inline" method="POST" action="{{ route('interactions.destroy', ['id' => $interaction->id]) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn-smol-delete px-2 py-2">Delete</button>
-                                </form>
-                                <form style="display:inline" method="GET" action="{{ route('interactions.edit', ['id' => $interaction->id]) }}">
-                                    @csrf
-                                    <button type="submit" class="btn-smol-delete px-2 py-2">Edit</button>
-                                </form>
-                            </div>
+                        @if (Auth::check())
+                            @if((Auth::id() == $interaction->profile->user->id) || (Auth::user()->roles->contains(1)))
+                                <div class="flex flex-col justify-end">
+                                    <form style="display:inline" method="POST" action="{{ route('interactions.destroy', ['id' => $interaction->id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-smol-delete px-2 py-2">Delete</button>
+                                    </form>
+                                    <form style="display:inline" method="GET" action="{{ route('interactions.edit', ['id' => $interaction->id]) }}">
+                                        @csrf
+                                        <button type="submit" class="btn-smol-delete px-2 py-2">Edit</button>
+                                    </form>
+                                </div>
+                            @endif
                         @endif
                     </div>
                 @endif

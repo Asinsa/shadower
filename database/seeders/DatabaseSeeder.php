@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -26,6 +27,11 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfileTableSeeder::class);
         $this->call(PostTableSeeder::class);
         $this->call(InteractionTableSeeder::class);
+
+        $users = User::all();
+        foreach ($users as $user) {
+            $user->roles()->attach(4);
+        }
 
     }
 }
