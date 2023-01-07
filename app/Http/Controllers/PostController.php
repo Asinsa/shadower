@@ -45,7 +45,7 @@ class PostController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'image' => 'nullable|file|max:2048',
+            'image' => 'nullable|file|max:4000',
             'body' => 'nullable|max:2000',
         ]);
 
@@ -66,7 +66,7 @@ class PostController extends Controller
         }
 
         session()->flash('message', 'Post was successfully created!');
-        return redirect()->route('posts.index');
+        return view('posts.show', ['post' => $post]);
     }
 
     /**

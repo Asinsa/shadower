@@ -42,7 +42,7 @@ class ProfileController extends Controller
     {
         $validatedData = $request->validate([
             'username' => 'required|unique:profiles|max:30',
-            'profile_pic' => 'nullable|file|max:2048',
+            'profile_pic' => 'nullable|file|max:4000',
         ]);
 
         $profile = new Profile;
