@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('body')->nullable();
             $table->bigInteger('views')->unsigned()->default(0)->index();
-            $table->bigInteger('profile_id')->references('id')->on('profiles')
+            $table->bigInteger('profile_id')->unsigned();
+            
+            $table->foreign('profile_id')->references('id')->on('profiles')
                 ->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
