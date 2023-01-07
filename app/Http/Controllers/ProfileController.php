@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -42,7 +43,7 @@ class ProfileController extends Controller
     {
         $validatedData = $request->validate([
             'username' => 'required|unique:profiles|max:30',
-            'profile_pic' => 'nullable|file|max:4000',
+            'profile_pic' => 'nullable|file|max:5000',
         ]);
 
         $profile = new Profile;
@@ -99,13 +100,31 @@ class ProfileController extends Controller
     {
         $profile = Profile::findOrFail($id);
 
-        $validatedData = $request->validate([
-            'username' => [
-                'required',
-                'max:30',
-                Rule::unique('profiles')->ignore($id),],
-            'profile_pic' => 'nullable|url|max:2048',
-        ]);
+        if ($request['profile_pic'] != null) {
+            $validatedData = $request->validate([
+                'username' => ['required', 'max:30', Rule::unique('profiles')->ignore($id),],
+                'profile_pic' => 'nullable|file|max:5000',
+            ]);
+
+            if ($request->hasFile('profile_pic')) {
+                $filename = time().$request->file('profile_pic')->getClientOriginalName();
+                $path = $request->file('profile_pic')->move('images/profile_images/', $filename);
+    
+                if(File::exists($profile->image->url)) {
+                    File::delete($profile->image->url);
+                }
+                $profile->image()->delete();
+                
+                $image = new Image;
+                $image->url = $path;
+    
+                $profile->image()->save($image);
+            }
+        } else {
+            $validatedData = $request->validate([
+                'username' => ['required','max:30', Rule::unique('profiles')->ignore($id),],
+            ]);
+        }
 
         $profile->username = $validatedData['username'];
         $profile->user_id = Auth::id();

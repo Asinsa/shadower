@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -45,7 +46,7 @@ class PostController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'image' => 'nullable|file|max:4000',
+            'image' => 'nullable|file|max:5000',
             'body' => 'nullable|max:2000',
         ]);
 
@@ -116,14 +117,34 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'image' => 'nullable|url|max:2048',
-            'body' => 'nullable|max:2000',
-        ]);
+        if ($request['image'] != null) {
+            $validatedData = $request->validate([
+                'title' => 'required|max:255',
+                'image' => 'nullable|file|max:5000',
+                'body' => 'nullable|max:2000',
+            ]);
+
+            if ($request->hasFile('image')) {
+                $filename = time().$request->file('image')->getClientOriginalName();
+                $path = $request->file('image')->move('images/post_images/', $filename);
+    
+                if(File::exists($post->image->url)) {
+                    File::delete($post->image->url);
+                }
+                $post->image()->delete();
+                $image = new Image;
+                $image->url = $path;
+    
+                $post->image()->save($image);
+            }
+        } else {
+            $validatedData = $request->validate([
+                'title' => 'required|max:255',
+                'body' => 'nullable|max:2000',
+            ]);
+        }
 
         $post->title = $validatedData['title'];
-        $post->image = $validatedData['image'];
         $post->body = $validatedData['body'];
         $post->profile_id = Auth::user()->profile->id;
         $post->save();

@@ -35,7 +35,7 @@ class InteractionFactory extends Factory
             }
         } else {
             $type = 'comment';
-            $comment = fake()->sentence(6, true);
+            $comment = fake()->bs();
         }
 
         return [

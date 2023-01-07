@@ -14,7 +14,7 @@
                 </div>
                 <div class="mb-6">
                     <label class="block mb-2 normal-text">Image Upload:</label>
-                    <input type="file" name="image" value="{{ $post->imageable }}" class="small-form-input">
+                    <input type="file" name="image" class="small-form-input">
                 </div>
                 <div class="mb-6">
                     <label class="block mb-2 normal-text">Content:</label>

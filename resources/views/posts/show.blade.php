@@ -44,7 +44,7 @@
                 </div>
                 <div>
                     @if ($post->image != null)
-                        <img class="mx-auto" src={{ url($post->image->url)}} alt="Image" width="400" height="400">
+                        <img class="mx-auto" src={{ url($post->image->url)}} alt="Image" height="100">
                     @endif
                     <div class="normal-text mt-4">
                         {{ $post->body }}
