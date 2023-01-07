@@ -100,12 +100,12 @@ class ProfileController extends Controller
     {
         $profile = Profile::findOrFail($id);
 
-        if ($request['profile_pic'] != null) {
-            $validatedData = $request->validate([
-                'username' => ['required', 'max:30', Rule::unique('profiles')->ignore($id),],
-                'profile_pic' => 'nullable|file|max:5000',
-            ]);
+        $validatedData = $request->validate([
+            'username' => ['required', 'max:30', Rule::unique('profiles')->ignore($id),],
+            'profile_pic' => 'nullable|file|max:5000',
+        ]);
 
+        if ($request['profile_pic'] != null) {
             if ($request->hasFile('profile_pic')) {
                 $filename = time().$request->file('profile_pic')->getClientOriginalName();
                 $path = $request->file('profile_pic')->move('images/profile_images/', $filename);
@@ -120,12 +120,8 @@ class ProfileController extends Controller
     
                 $profile->image()->save($image);
             }
-        } else {
-            $validatedData = $request->validate([
-                'username' => ['required','max:30', Rule::unique('profiles')->ignore($id),],
-            ]);
-        }
-
+        } 
+        
         $profile->username = $validatedData['username'];
         $profile->user_id = Auth::id();
         $profile->save();

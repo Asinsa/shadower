@@ -117,13 +117,13 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        if ($request['image'] != null) {
-            $validatedData = $request->validate([
-                'title' => 'required|max:255',
-                'image' => 'nullable|file|max:5000',
-                'body' => 'nullable|max:2000',
-            ]);
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'image' => 'nullable|file|max:5000',
+            'body' => 'nullable|max:2000',
+        ]);
 
+        if ($request['image'] != null) {
             if ($request->hasFile('image')) {
                 $filename = time().$request->file('image')->getClientOriginalName();
                 $path = $request->file('image')->move('images/post_images/', $filename);
@@ -137,11 +137,6 @@ class PostController extends Controller
     
                 $post->image()->save($image);
             }
-        } else {
-            $validatedData = $request->validate([
-                'title' => 'required|max:255',
-                'body' => 'nullable|max:2000',
-            ]);
         }
 
         $post->title = $validatedData['title'];

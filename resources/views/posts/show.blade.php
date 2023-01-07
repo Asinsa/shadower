@@ -34,7 +34,11 @@
                 <div class="flex">
                     <div class="flex flex-col items-center p-3">
                         <a href='{{ route('profiles.show', ['id' => $post->profile->id]) }}'>
-                            <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src={{ url($post->profile->image->url)}} alt="Profile Pic"/>
+                            @if (($post->profile->image) == null)
+                                <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src="https://images.unsplash.com/photo-1665517941611-42cb25703695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80" width="300" height="300" alt="Profile Pic"/>
+                            @else
+                                <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src={{ url($post->profile->image->url)}} alt="Profile Pic"/>
+                            @endif
                             <h5 class="username-text">{{ $post->profile->username }}</h5>
                         </a>
                     </div>
@@ -114,7 +118,7 @@
                 @if ( $interaction->interaction_type == "comment")
                     <div class="comment-view">
                         <div class="comment-profilepic">
-                            @if (($post->profile->image) == null)
+                            @if (($interaction->profile->image) == null)
                                 <img src="https://images.unsplash.com/photo-1551122089-4e3e72477432?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8cnVieXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="" class="h-8 w-8 object-fill rounded-full">
                             @else
                                 <img class="h-8 w-8 object-fill rounded-full" src={{ url($interaction->profile->image->url)}} alt="Profile Pic"/>
