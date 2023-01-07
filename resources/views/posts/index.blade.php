@@ -19,9 +19,13 @@
     <br>
 
     @foreach ($posts as $post)
-        <div class="item ">
+        <div class="item">
             <div class="card">
-                <div class="mb-4 ml-4">
+                <div class="flex justify-between">
+                    @include('components/viewcount-image')
+                    <p class="date-text text-right">{{ $post->created_at }}</p>
+                </div>
+                <div class="m-4">
                     <div class="flex">
                         <div class="flex flex-col items-center p-3">
                             <a href='{{ route('profiles.show', ['id' => $post->profile->id]) }}'>
@@ -32,7 +36,6 @@
                         <div class="flex flex-grow items-center pb-2 pl-2 card-title">
                             <a href='{{ route('posts.show', ['id' => $post->id]) }}'>{{ $post->title }}</a>
                         </div>
-                        <p class="date-text text-right">{{ $post->created_at }}</p>
                     </div>
                     <a href='{{ route('posts.show', ['id' => $post->id]) }}'>
                         <div>

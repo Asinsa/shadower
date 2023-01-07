@@ -23,4 +23,9 @@ class Post extends Model
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    public function incrementViewCount() {
+        $this->views++;
+        return $this->save();
+    }
 }

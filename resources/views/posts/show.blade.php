@@ -26,29 +26,30 @@
 
     <div class="item mt-3">
         <div class="card">
-            <div class="mb-4 ml-4">
+            <div class="flex justify-between">
+                @include('components/viewcount-image')
+                <p class="date-text text-right">{{ $post->created_at }}</p>
+            </div>
+            <div class="m-4">
                 <div class="flex">
                     <div class="flex flex-col items-center p-3">
                         <a href='{{ route('profiles.show', ['id' => $post->profile->id]) }}'>
-                            <img class="w-10 h-10 mb-1 rounded-full shadow-lg" src={{ url($post->profile->image->url)}} alt="Profile Pic"/>
+                            <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src={{ url($post->profile->image->url)}} alt="Profile Pic"/>
                             <h5 class="username-text">{{ $post->profile->username }}</h5>
                         </a>
                     </div>
                     <div class="flex flex-grow items-center pb-2 pl-2 card-title">
-                        <a href='{{ route('posts.show', ['id' => $post->id]) }}'>{{ $post->title }}</a>
+                        {{ $post->title }}
                     </div>
-                    <p class="date-text text-right">{{ $post->created_at }}</p>
                 </div>
-                <a href='{{ route('posts.show', ['id' => $post->id]) }}'>
-                    <div>
-                        @if ($post->image != null)
-                            <img class="mx-auto" src={{ url($post->image->url)}} alt="Image" width="400" height="400">
-                        @endif
-                        <div class="normal-text mt-4">
-                            {{ $post->body }}
-                        </div>
+                <div>
+                    @if ($post->image != null)
+                        <img class="mx-auto" src={{ url($post->image->url)}} alt="Image" width="400" height="400">
+                    @endif
+                    <div class="normal-text mt-4">
+                        {{ $post->body }}
                     </div>
-                </a>
+                </div>
             </div>
         </div>
         <br>

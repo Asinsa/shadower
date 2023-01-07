@@ -9,6 +9,8 @@ use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -73,10 +75,22 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $post = Post::findOrFail($id);
-        return view('posts.show', ['post' => $post]);
+
+        if(! Auth::check()){
+            $cookie = (Str::replace('.','',($request->ip())).'-'. $post->id);
+        } else {
+            $cookie = (Auth::user()->id.'-'. $post->id);
+        }
+        if(Cookie::get($cookie) == ''){
+            $cookie = cookie($cookie, '1', 60);
+            $post->incrementViewCount();
+            return response()->view('posts.show',['post' => $post])->withCookie($cookie);
+        } else {
+            return view('posts.show', ['post' => $post]);
+        }
     }
 
     /**

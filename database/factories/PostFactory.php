@@ -17,10 +17,12 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        $views = rand(0, 15);
         return [
             'title' => fake()->realText(60, 2),
             'body' => fake()->text(200),
             'profile_id' => Profile::all()->random()->id,
+            'views' => $views,
         ];
     }
 }
