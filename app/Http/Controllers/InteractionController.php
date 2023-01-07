@@ -38,20 +38,32 @@ class InteractionController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'comment' => 'required|max:255',
-            'post_id' => 'required',
-        ]);
+        if ($request['interaction_type'] == "comment") {
+            $validatedData = $request->validate([
+                'comment' => 'required|max:255',
+                'post_id' => 'required',
+            ]);
 
-        $comment = new Interaction;
-        $comment->profile_id = Auth::user()->profile->id;
-        $comment->post_id = $validatedData['post_id'];
-        $comment->interaction_type = 'comment';
-        $comment->comment = $validatedData['comment'];
-        $comment->save();
+            $comment = new Interaction;
+            $comment->profile_id = Auth::user()->profile->id;
+            $comment->post_id = $validatedData['post_id'];
+            $comment->interaction_type = 'comment';
+            $comment->comment = $validatedData['comment'];
+            $comment->save();
 
-        session()->flash('message', 'Comment was successfully created!');
-        return redirect()->route('posts.show', ['id' => $validatedData['post_id']]);
+            session()->flash('message', 'Comment was successfully created!');
+            return redirect()->route('posts.show', ['id' => $validatedData['post_id']]);
+        } 
+        else {
+            $like = new Interaction;
+            $like->profile_id = Auth::user()->profile->id;
+            $like->post_id = $request['post_id'];
+            $like->interaction_type = 'like';
+            $like->save();
+
+            session()->flash('message', 'Post Liked!');
+            return redirect()->route('posts.index');
+        }
     }
 
     /**
