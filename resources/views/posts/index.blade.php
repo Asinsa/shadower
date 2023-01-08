@@ -36,9 +36,17 @@
                         <div class="flex flex-col items-center p-3">
                             <a href='{{ route('profiles.show', ['id' => $post->profile->id]) }}'>
                                 @if (($post->profile->image) == null)
-                                    <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src="https://images.unsplash.com/photo-1665517941611-42cb25703695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80" alt="Profile Pic"/>
+                                    @if($post->profile->user->roles->contains(1))
+                                        <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg p-1 ring-2 ring-lime-500" src="https://images.unsplash.com/photo-1665517941611-42cb25703695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80" alt="Profile Pic"/>
+                                    @else
+                                        <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src="https://images.unsplash.com/photo-1665517941611-42cb25703695?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=927&q=80" alt="Profile Pic"/>
+                                    @endif
                                 @else
-                                    <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src={{ url($post->profile->image->url)}} alt="Profile Pic"/>
+                                    @if($post->profile->user->roles->contains(1))
+                                        <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg p-1 ring-2 ring-lime-500" src={{ url($post->profile->image->url)}} alt="Profile Pic"/>
+                                    @else
+                                        <img class="mx-auto w-10 h-10 mb-1 rounded-full shadow-lg" src={{ url($post->profile->image->url)}} alt="Profile Pic"/>
+                                    @endif
                                 @endif
                                 <h5 class="username-text">{{ $post->profile->username }}</h5>
                             </a>

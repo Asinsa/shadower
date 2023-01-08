@@ -20,6 +20,11 @@
         </div>
         <div class="item mt-3">
             <div class="card">
+                <div class="flex justify-end">
+                    @if (Auth::user()->roles->contains(1))
+                        <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Admin</span>
+                    @endif
+                </div>
                 <div class="justify-center m-5">
                     <div class="flex flex-col items-center">
                         @if ((Auth::user()->profile->image) == null)
@@ -28,6 +33,7 @@
                             <img class=" mb-1 rounded-full shadow-lg" src={{ url(Auth::user()->profile->image->url) }} width="300" height="300" alt="Profile Pic"/>
                         @endif
                         <h5 class="card-title">{{ Auth::user()->profile->username }}</h5>
+                        
                     </div>
                 </div>
             </div>
