@@ -47,6 +47,8 @@ Route::get('/interactions/{id}/edit', [InteractionController::class, 'edit'])->n
 Route::put('/interactions/{id}', [InteractionController::class, 'update'])->name('interactions.update');
 Route::delete('/interactions/{id}', [InteractionController::class, 'destroy'])->name('interactions.destroy');
 
+Route::get('/send-interactionnotif', [InteractionNotifController::class, 'sendInteractionNotif']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

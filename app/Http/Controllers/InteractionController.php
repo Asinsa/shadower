@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Interaction;
+use App\Models\Post;
+use App\Models\Profile;
+use App\Models\User;
+use App\Notifications\InteractionNotification;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class InteractionController extends Controller
 {
@@ -51,6 +56,22 @@ class InteractionController extends Controller
             $comment->comment = $validatedData['comment'];
             $comment->save();
 
+            // Notifying poster of post that is commented on
+            $post = Post::findOrFail($comment->post_id);
+            $commenter = Auth::user()->profile;
+            $poster = $post->profile->user;
+            $posterProfile = $post->profile;
+
+            $interactionData = [
+                'greeting' => "Hello $poster->name ($posterProfile->username)!",
+                'body' => "$commenter->username has commented '$comment->comment' on your post '$post->title'",
+                'type' => 'View Comment',
+                'url' => url("/posts/$comment->post_id"),
+                'thankyou' => 'Thank you for posting on Shadower'
+            ];
+
+            Notification::send($poster, new InteractionNotification($interactionData));
+
             session()->flash('comment_message', 'Comment was successfully created!');
             return redirect()->route('posts.show', ['id' => $validatedData['post_id']]);
         } 
@@ -60,6 +81,22 @@ class InteractionController extends Controller
             $like->post_id = $request['post_id'];
             $like->interaction_type = 'like';
             $like->save();
+
+            // Notifying poster of post that is commented on
+            $post = Post::findOrFail($like->post_id);
+            $commenter = Auth::user()->profile;
+            $poster = $post->profile->user;
+            $posterProfile = $post->profile;
+
+            $interactionData = [
+                'greeting' => "Hello $poster->name ($posterProfile->username)!",
+                'body' => "$commenter->username likes your post '$post->title'",
+                'type' => 'View Post',
+                'url' => url("/posts/$like->post_id"),
+                'thankyou' => 'Thank you for posting on Shadower'
+            ];
+
+            Notification::send($poster, new InteractionNotification($interactionData));
 
             session()->flash('message', 'Post Liked!');
             if($request['redirect_to'] == "all") {
