@@ -12,9 +12,14 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Livewire -->
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
+
+    @livewireScripts
 
     @include('layouts.navigation')
     <div class="dark:bg-black">
