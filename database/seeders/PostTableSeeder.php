@@ -25,7 +25,7 @@ class PostTableSeeder extends Seeder
         $a->save();
         
         $image = new Image;
-        $image->url = fake()->imageUrl(1920, 1080);
+        $image->url = "https://static.hbo.com/2022-06/house-of-the-dragon-ka-1920.jpg";
         $a->image()->save($image);
 
         Post::factory()->has(Interaction::factory()->count(10))->count(10)->create();

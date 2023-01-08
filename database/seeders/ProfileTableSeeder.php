@@ -22,11 +22,17 @@ class ProfileTableSeeder extends Seeder
         $a->username = "Shadow";
         $a->user_id = 1;
         $a->save();
-
         $image = new Image;
-        $image->url = "https://api.lorem.space/image/face?w=150&h=150";
+        $image->url = "https://images.photowall.com/products/74785/black-dragon-at-beach.jpg?h=699&q=85";
         $a->image()->save($image);
 
+        $post = new Post;
+        $post->title = "Best Day Ever";
+        $post->profile_id = $a->id;
+        $post->save();
+        $image = new Image;
+        $image->url = "https://twinfinite.net/wp-content/uploads/2022/11/Shadow-the-Hedgehog-Key-Art-from-Sonic-Forces.jpg?fit=1200%2C675";
+        $post->image()->save($image);
 
         Profile::factory()->has(Post::factory()->count(5))->count(5)->create();
 
