@@ -72,7 +72,8 @@
                 </div>
             </div>
             <div class="flex justify-end">
-                <div class="grid grid-cols-2 place-items-end">
+                <livewire:likes :post="$post"/>
+                {{-- <div class="grid grid-cols-2 place-items-end">
                     @if (!Auth::check())
                         <div class="self-center mt-2 date-text font-bold">
                             <p>{{ DB::table('interactions')->where('interaction_type', 'like')->where('post_id', $post->id)->count() }} Likes</p>
@@ -110,7 +111,7 @@
                             </form>
                         @endif
                     @endif
-                </div>
+                </div> --}}
             </div>
         </div>
         <br>

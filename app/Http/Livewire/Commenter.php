@@ -7,10 +7,7 @@ use Livewire\Component;
 use App\Models\Interaction;
 use App\Models\Post;
 use App\Notifications\InteractionNotification;
-
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Notification;
 
 class Commenter extends Component
@@ -61,7 +58,5 @@ class Commenter extends Component
     public function render()
     {
         return view('livewire.commenter');
-        // $interactions = DB::table('interactions')->where('post_id');
-        // return view('livewire.commenter', ['interactions' => $interactions]);
     }
 }

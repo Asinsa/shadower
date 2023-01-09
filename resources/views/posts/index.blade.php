@@ -67,11 +67,14 @@
                     </a>
                 </div>
                 <div class="flex justify-between">
-                    <p></p>
                     <div class="mb-3" >
                         @include('components/comments-button', ['item' => $post], ['route' => 'posts.show'])
                     </div>
-                    <div class="grid grid-cols-2 place-items-end">
+                    <div class="grid place-items-end">
+                        <livewire:likes :post="$post"/>
+                    </div>
+
+                    {{-- <div class="grid grid-cols-2 place-items-end">
                         @if (!Auth::check())
                             <div class="self-center mt-9 date-text font-bold">
                                 <p>{{ DB::table('interactions')->where('interaction_type', 'like')->where('post_id', $post->id)->count() }} Likes</p>
@@ -109,7 +112,7 @@
                                 </form>
                             @endif
                         @endif
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <br>
