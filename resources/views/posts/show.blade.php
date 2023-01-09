@@ -136,7 +136,9 @@
                 </div>
             </div>
 
-            @foreach ($post->interactions as $interaction)
+            <livewire:commenter :post="$post"/>
+
+            {{-- @foreach ($post->interactions as $interaction)
                 @if ( $interaction->interaction_type == "comment")
                     <div class="comment-view">
                         <div class="comment-profilepic">
@@ -162,13 +164,6 @@
                                 </div>
                                 <div class="normal-text">
                                     {{ $interaction->comment }}
-                                </div>
-                            </div>
-                            <div class="flex justify-start items-center text-xs w-full">
-                                <div class="hidden font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
-                                    <a href="#" class="hover:underline">
-                                    ignore this for now it's a like button
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -220,7 +215,7 @@
                         </div>
                     </div>
                 </form>
-            @endif
+            @endif --}}
         </div>
     </div>
 @endsection
