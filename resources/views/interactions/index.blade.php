@@ -3,6 +3,13 @@
 @section('title', 'Interaction Index')
 
 @section('content')
+@if (session('fact'))
+    <div class="flex justify-center p-4 mt-10 mb-4 text-sm text-sky-500 bg-green-100 rounded-lg dark:bg-gray-800 dark:text-sky-500" role="alert">
+        <div>
+        <span class="font-medium"><b>Random Fact: </b>{{ session('fact') }}</span>
+        </div>
+    </div>
+@endif
     <p>All interactions (from most to least recent):</p>
     <ul>
         @foreach ($interactions->reverse() as $interaction)

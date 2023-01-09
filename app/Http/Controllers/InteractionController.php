@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use App\Http\Facts;
 
 class InteractionController extends Controller
 {
@@ -19,8 +20,9 @@ class InteractionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Facts $t)
     {
+        session()->flash('fact', $t->getFact());
         $interactions = Interaction::get();
         return view('interactions.index', ['interactions' => $interactions]);
     }

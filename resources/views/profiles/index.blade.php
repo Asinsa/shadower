@@ -3,6 +3,13 @@
 @section('title', 'Profiles')
 
 @section('content')
+@if (session('fact'))
+    <div class="flex justify-center p-4 mt-10 mb-4 text-sm text-sky-500 bg-green-100 rounded-lg dark:bg-gray-800 dark:text-sky-500" role="alert">
+        <div>
+        <span class="font-medium"><b>Random Fact: </b>{{ session('fact') }}</span>
+        </div>
+    </div>
+@endif
 <div class="p-6 justify-center grid grid-cols-4 gap-2">
     @foreach ($profiles as $profile)
         <a href='{{ route('profiles.show', ['id' => $profile->id]) }}'>

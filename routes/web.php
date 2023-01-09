@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InteractionController;
+use App\Http\Facts;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,9 @@ use App\Http\Controllers\InteractionController;
 |
 */
 
+app()->singleton('App\Http\Facts', function ($app) {
+    return new Facts();
+});
 
 Route::get('/', function () {
     return view('welcome');

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use App\Http\Facts;
 
 class PostController extends Controller
 {
@@ -20,8 +21,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Facts $t)
     {
+        session()->flash('fact', $t->getFact());
         $posts = Post::orderBy('id', 'DESC')->paginate(10);
         return view('posts.index', ['posts' => $posts]);
     }

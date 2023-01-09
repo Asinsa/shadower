@@ -9,6 +9,7 @@ use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
+use App\Http\Facts;
 
 class ProfileController extends Controller
 {
@@ -17,8 +18,9 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Facts $t)
     {
+        session()->flash('fact', $t->getFact());
         $profiles = Profile::get();
         return view('profiles.index', ['profiles' => $profiles]);
     }
